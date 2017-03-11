@@ -1,0 +1,29 @@
+{
+  "name": "minifloat",
+  "version": "1.0.0",
+  "description": "A minifloat tutorial",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register",
+    "start": "webpack-dev-server"
+  },
+  "author": "Travis Geis <travis@travisgeis.com> (travisgeis.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "array-equal": "^1.0.0",
+    "assert": "^1.4.1",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.4.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "mocha": "^3.2.0",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
+}
