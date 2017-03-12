@@ -83,8 +83,8 @@ describe("Minifloat with pattern 11111000", function () {
     assert(arrayEqual(mf.significandBits, [0, 0, 0]));
   });
 
-  it("has value -Infinity", function () {
-    assert.strictEqual(mf.exponentValue(), -Infinity);
+  it("has exponent value Infinity", function () {
+    assert.strictEqual(mf.exponentValue(), Infinity);
   });
 
   it("has a valueString of '-Infinity'", function () {

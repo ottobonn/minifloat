@@ -28,6 +28,14 @@ function floatFactory(numExponentBits=4, numSignificandBits=3) {
       return unsignedValue(this.exponentBits) === 0;
     }
 
+    isSpecial() {
+      return unsignedValue(this.exponentBits) === (1 << numExponentBits) - 1;
+    }
+
+    isNormal() {
+      return !(this.isDenormal() || this.isSpecial());
+    }
+
     sign() {
       return this.signBit ? -1 : 1;
     }
@@ -37,10 +45,10 @@ function floatFactory(numExponentBits=4, numSignificandBits=3) {
       let significandValue = unsignedValue(this.significandBits);
       if (this.isDenormal()) {
         return 1 - bias;
-      } else if (rawExp === (1 << numExponentBits) - 1) {
+      } else if (this.isSpecial()) {
         // All-1 exponent
         if (significandValue === 0) {
-          return this.sign() * Infinity;
+          return Infinity;
         } else {
           return NaN;
         }
@@ -59,7 +67,7 @@ function floatFactory(numExponentBits=4, numSignificandBits=3) {
     valueString() {
       var expValue = this.exponentValue();
       if (!isFinite(expValue) || isNaN(expValue)) {
-        return expValue.toString();
+        return (this.sign() * expValue).toString();
       }
       var sign = this.sign().toString();
       var exp = `2^${expValue}`;
