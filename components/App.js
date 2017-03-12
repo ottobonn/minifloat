@@ -2,6 +2,7 @@ import React from "react";
 import {Minifloat} from "../Float";
 
 import BinaryInput from "./BinaryInput";
+import ValueDisplay from "./ValueDisplay";
 
 export default class App extends React.Component {
 
@@ -49,13 +50,7 @@ export default class App extends React.Component {
         <form>
           <BinaryInput numBits={8} onChange={this.handleChange} />
         </form>
-        <div className="jumbotron">
-          <h2>Float Value</h2>
-          <div id="valueString">
-            {this.state.float ? this.state.float.valueString() : "No float"}
-          </div>
-        </div>
-
+        <ValueDisplay float={this.state.float} />
       </div>
     );
   }
