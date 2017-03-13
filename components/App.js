@@ -48,7 +48,7 @@ export default class App extends React.Component {
     return (
       <div>
         <form>
-          <BinaryInput numBits={8} onChange={this.handleChange} />
+          <BinaryInput numExponentBits={4} numSignificandBits={3} onChange={this.handleChange} />
         </form>
         <ValueDisplay float={this.state.float} />
       </div>
