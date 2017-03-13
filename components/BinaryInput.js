@@ -19,57 +19,48 @@ export default class BinaryInput extends React.Component {
     }
   }
 
+  renderBitGroup(groupInfo, offset, totalNumBits) {
+    let group = [];
+    for (let j = 0; j < groupInfo.bits; j++) {
+      let bitNumber = offset + j;
+      group.push(
+        <BitInput
+          key={"bit-" + bitNumber}
+          ref={(input) => {this.inputs[bitNumber] = input;}}
+          onChange={this.handleChange}
+          getNextInputRef={bitNumber < totalNumBits - 1 ? () => this.inputs[bitNumber + 1] : null}
+          getPrevInputRef={bitNumber > 0 ? () => this.inputs[bitNumber - 1] : null}
+        />
+      );
+    }
+    return (
+      <div key={"group-" + groupInfo.name} className="bit-group" style={{flex: groupInfo.bits}}>
+        <h3 className="name">{groupInfo.name}</h3>
+        <div className="bit-group-input-wrapper">
+          {group}
+        </div>
+      </div>
+    );
+  }
+
   render() {
     let numBits = 1 + this.props.numExponentBits + this.props.numSignificandBits;
-    let inputs = [];
-    let values = [];
-    let labelInfo = [
+    let groupInfo = [
       {name: "Sign", bits: 1},
       {name: "Exponent", bits: this.props.numExponentBits},
       {name: "Significand", bits: this.props.numSignificandBits}
     ];
-    let labels = labelInfo.map((l, index) => {
-      return (
-        <td key={"label" + index} colSpan={l.bits}>
-          {l.name}
-        </td>
-      );
+    let offset = 0;
+    let inputs = groupInfo.map((group, i) => {
+      let g = this.renderBitGroup(group, offset, numBits);
+      offset += group.bits;
+      return g;
     });
-    for (let i = 0; i < numBits; i++) {
-      inputs.push(
-        <td key={"bit" + i}>
-          <BitInput
-            ref={(input) => {this.inputs[i] = input;}}
-            onChange={this.handleChange}
-            getNextInputRef={i < numBits - 1 ? () => this.inputs[i + 1] : null}
-            getPrevInputRef={i > 0 ? () => this.inputs[i - 1] : null}
-          />
-        </td>
-      );
-      values.push(
-        <td key={"value" + i}>
-          <div ref={(elem) => {this.values[i] = elem;}} />
-        </td>
-      );
-    }
-
     return (
-      <div className="form-group row">
-        <label className="col-xs-12 col-2 col-form-label">Enter a bit pattern</label>
-        <div className="col-xs-12 col-10">
-          <table>
-            <tbody>
-              <tr>
-                {labels}
-              </tr>
-              <tr>
-                {inputs}
-              </tr>
-              <tr>
-                {values}
-              </tr>
-            </tbody>
-          </table>
+      <div className="binary-input">
+        <h2>Bit pattern</h2>
+        <div className="groups-wrapper">
+          {inputs}
         </div>
       </div>
     );

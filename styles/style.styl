@@ -1,3 +1,28 @@
-input[type=number]
-  border-radius: 0
-  -moz-appearance: textfield
+.binary-input
+
+  .groups-wrapper
+    display: flex
+    justify-content: center
+    align-items: center
+
+  .bit-group
+    display: flex
+    flex-direction: column
+    .name
+      margin: .2em
+
+  .bit-group-input-wrapper
+    display: flex
+    flex-direction: row
+    flex: 1
+
+  .bit-input-wrapper
+    flex: 1
+    padding: .3em
+
+  .bit-input
+    border-radius: 0
+    font-size: 200%
+    border: none
+    border-bottom: 2px solid black
+    width: 100%

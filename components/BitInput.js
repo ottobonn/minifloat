@@ -20,34 +20,36 @@ export default class BitInput extends React.Component {
 
   render() {
     return (
-      <input
-        className="form-control"
-        type="number"
-        min="0"
-        max="1"
-        maxLength="1"
-        ref={(input) => {this.input = input;}}
-        onChange={(event) => {
-          // Handle the new value and advance to the next input
-          if (this.props.onChange) {
-            this.props.onChange(event.target.value);
-          }
-          if (this.isValidBit(event.target.value)) {
-            if (this.props.getNextInputRef) {
-              this.props.getNextInputRef().focus();
+      <div className="bit-input-wrapper">
+        <input
+          type="text"
+          className="bit-input"
+          min="0"
+          max="1"
+          maxLength="1"
+          ref={(input) => {this.input = input;}}
+          onChange={(event) => {
+            // Handle the new value and advance to the next input
+            if (this.props.onChange) {
+              this.props.onChange(event.target.value);
             }
-          }
-        }}
-        onKeyDown={(event) => {
-          // Back up through the inputs on backspace
-          let backspace = (event.keyCode === 8);
-          if (backspace && event.target.value === "") {
-            if (this.props.getPrevInputRef) {
-              this.props.getPrevInputRef().focus();
+            if (this.isValidBit(event.target.value)) {
+              if (this.props.getNextInputRef) {
+                this.props.getNextInputRef().focus();
+              }
             }
-          }
-        }}
-      />
+          }}
+          onKeyDown={(event) => {
+            // Back up through the inputs on backspace
+            let backspace = (event.keyCode === 8);
+            if (backspace && event.target.value === "") {
+              if (this.props.getPrevInputRef) {
+                this.props.getPrevInputRef().focus();
+              }
+            }
+          }}
+        />
+      </div>
     );
   }
 };
