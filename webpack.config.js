@@ -40,7 +40,7 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       {
-        from: "./index.html",
+        from: "static",
         to: buildDir
       }
     ])
