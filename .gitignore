@@ -1,4 +1,4 @@
 node_modules/
 
-# webpack-generated js file
-index.js
+# Compiled application
+build/
