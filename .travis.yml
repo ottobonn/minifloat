@@ -1,8 +1,7 @@
 language: node_js
 node_js: node # Latest stable node
 script:
-  - npm run prod
-  - cp index.html build/index.html
+  - npm run build
 branches:
   only:
     - master

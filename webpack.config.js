@@ -1,5 +1,6 @@
-let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let path = require("path");
+
+let CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const buildDir = path.resolve(__dirname, "build");
 
@@ -7,7 +8,6 @@ module.exports = {
   entry: "./main.js",
   output: {
     path: buildDir,
-    publicPath: "build",
     filename: "bundle.js"
   },
   devServer: {
@@ -36,5 +36,13 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: "./index.html",
+        to: buildDir
+      }
+    ])
+  ]
 };
