@@ -9,7 +9,8 @@
   "scripts": {
     "test": "mocha --compilers js:babel-core/register",
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack",
+    "prod": "webpack -p"
   },
   "author": "Travis Geis <travis@travisgeis.com> (travisgeis.com)",
   "license": "ISC",
