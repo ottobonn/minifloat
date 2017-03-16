@@ -56,7 +56,7 @@ function explainValue(float) {
     isNegative: "The sign bit is 1, indicating that the float is negative."
   };
   if (!float) {
-    return "";
+    return null;
   }
   let exponentValue = float.exponentValue();
   let out = [];
@@ -82,19 +82,27 @@ function explainValue(float) {
   return out.join(" ");
 }
 
+const NO_FLOAT_MESSAGE = "Enter a float bit pattern";
+
 export default class ValueDisplay extends React.Component {
   render() {
     let float = this.props.float;
     return (
-      <div className="jumbotron">
-        <h2>Float Value</h2>
-        <div id="valueString">
-          {float ? renderValue(float) : "No float"}
+      <div className="jumbotron value-display">
+        <h3>Float Value</h3>
+        <div className="value-string">
+          {float ? renderValue(float) : NO_FLOAT_MESSAGE}
         </div>
         <hr />
-        <h3>Why?</h3>
+        <h3>Decimal Approximation</h3>
+        <p><small>Computed in 64-bit IEEE-754 double</small></p>
+        <div className="decimal-value">
+          {float ? float.value() : NO_FLOAT_MESSAGE}
+        </div>
+        <hr />
+        <h3>Value Explanation</h3>
         <div id="explanation">
-          {explainValue(float)}
+          {explainValue(float) || NO_FLOAT_MESSAGE}
         </div>
       </div>
     );
