@@ -59,8 +59,12 @@ describe("Minifloat with pattern 01111000", function () {
     assert(arrayEqual(mf.significandBits, [0, 0, 0]));
   });
 
-  it("has value Infinity", function () {
+  it("has exponentValue Infinity", function () {
     assert.strictEqual(mf.exponentValue(), Infinity);
+  });
+
+  it("has value Infinity", function () {
+    assert.strictEqual(mf.value(), Infinity);
   });
 });
 
@@ -82,6 +86,10 @@ describe("Minifloat with pattern 11111000", function () {
   it("has exponent value Infinity", function () {
     assert.strictEqual(mf.exponentValue(), Infinity);
   });
+
+  it("has value -Infinity", function () {
+    assert.strictEqual(mf.value(), -Infinity);
+  });
 });
 
 describe("Minifloat with pattern 011110001", function () {
@@ -99,8 +107,12 @@ describe("Minifloat with pattern 011110001", function () {
     assert(arrayEqual(mf.significandBits, [0, 0, 1]));
   });
 
-  it("has value NaN", function () {
+  it("has exponentValue NaN", function () {
     assert(isNaN(mf.exponentValue()));
+  });
+
+  it("has value NaN", function () {
+    assert(isNaN(mf.value()));
   });
 });
 
@@ -119,8 +131,12 @@ describe("Minifloat with pattern 00000000 (positive 0)", function () {
     assert(arrayEqual(mf.significandBits, [0, 0, 0]));
   });
 
-  it("has exponent value -6", function () {
+  it("has exponentValue -6", function () {
     assert.strictEqual(mf.exponentValue(), -6);
+  });
+
+  it("has value 0", function () {
+    assert.strictEqual(mf.value(), 0);
   });
 });
 
@@ -139,8 +155,12 @@ describe("Minifloat with pattern 10000000 (negative 0)", function () {
     assert(arrayEqual(mf.significandBits, [0, 0, 0]));
   });
 
-  it("has exponent value -6", function () {
+  it("has exponentValue -6", function () {
     assert.strictEqual(mf.exponentValue(), -6);
+  });
+
+  it("has value 0", function () {
+    assert.strictEqual(mf.value(), 0);
   });
 });
 
@@ -159,7 +179,11 @@ describe("Minifloat with pattern 01110101", function () {
     assert(arrayEqual(mf.significandBits, [1, 0, 1]));
   });
 
-  it("has exponent value 7", function () {
+  it("has exponentValue 7", function () {
     assert.strictEqual(mf.exponentValue(), 7);
+  });
+
+  it("has value 208", function () {
+    assert.strictEqual(mf.value(), 208);
   });
 });

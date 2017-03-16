@@ -41,6 +41,19 @@ function floatFactory(numExponentBits=4, numSignificandBits=3) {
       return this.signBit ? -1 : 1;
     }
 
+    value() {
+      let exponentValue = this.exponentValue();
+      if (!isFinite(exponentValue) || isNaN(exponentValue)) {
+        return this.sign() * exponentValue;
+      } else {
+        let significandValue = unsignedValue(this.significandBits) / Math.pow(2, this.significandBits.length);
+        if (this.isNormal()) {
+          significandValue += 1;
+        }
+        return this.sign() * Math.pow(2, exponentValue) * significandValue;
+      }
+    }
+
     exponentValue() {
       let rawExp = unsignedValue(this.exponentBits);
       let significandValue = unsignedValue(this.significandBits);
