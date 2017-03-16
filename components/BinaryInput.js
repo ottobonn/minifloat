@@ -34,7 +34,7 @@ export default class BinaryInput extends React.Component {
       );
     }
     return (
-      <div key={"group-" + groupInfo.name} className="bit-group" style={{flex: groupInfo.bits}}>
+      <div key={"group-" + groupInfo.name} className={`bit-group ${groupInfo.name.toLowerCase()}`} style={{flex: groupInfo.bits}}>
         <h3 className="name">{groupInfo.name}</h3>
         <div className="bit-group-input-wrapper">
           {group}

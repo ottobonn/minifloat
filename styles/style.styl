@@ -1,4 +1,5 @@
 .binary-input
+  margin: 1em 0 2em 0
 
   .groups-wrapper
     display: flex
@@ -8,8 +9,11 @@
   .bit-group
     display: flex
     flex-direction: column
+    &.exponent
+      background-color: #ddd
     .name
       margin: .2em
+      font-size: 100%
 
   .bit-group-input-wrapper
     display: flex
@@ -18,11 +22,17 @@
 
   .bit-input-wrapper
     flex: 1
-    padding: .3em
 
   .bit-input
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button
+      display: none
+    -moz-appearance: textfield
     border-radius: 0
     font-size: 200%
-    border: none
+    border: 1px solid gray
     border-bottom: 2px solid black
+    border-top: none
     width: 100%
+    background: none
+    text-align: center
+    font-family: monospace

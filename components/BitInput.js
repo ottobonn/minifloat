@@ -22,12 +22,13 @@ export default class BitInput extends React.Component {
     return (
       <div className="bit-input-wrapper">
         <input
-          type="text"
+          type="number"
           className="bit-input"
           min="0"
           max="1"
           maxLength="1"
           ref={(input) => {this.input = input;}}
+          onFocus={() => this.focus()}
           onChange={(event) => {
             // Handle the new value and advance to the next input
             if (this.props.onChange) {
@@ -42,9 +43,14 @@ export default class BitInput extends React.Component {
           onKeyDown={(event) => {
             // Back up through the inputs on backspace
             let backspace = (event.keyCode === 8);
-            if (backspace && event.target.value === "") {
-              if (this.props.getPrevInputRef) {
+            if (backspace) {
+              if (event.target.value === "" && this.props.getPrevInputRef) {
                 this.props.getPrevInputRef().focus();
+              }
+            } else {
+              // Prevent more than one bit in this field
+              if (event.target.value.length == 1) {
+                event.preventDefault();
               }
             }
           }}
