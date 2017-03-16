@@ -49,7 +49,7 @@ export default class BitInput extends React.Component {
               }
             } else {
               // Prevent more than one bit in this field
-              if (event.target.value.length == 1) {
+              if (event.target.value.length == 1 && !this.input.isSelected()) {
                 event.preventDefault();
               }
             }
