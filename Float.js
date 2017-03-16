@@ -58,25 +58,6 @@ function floatFactory(numExponentBits=4, numSignificandBits=3) {
         return rawExp - bias;
       }
     }
-
-    significandValueString() {
-      return this.significandBits.map((currentBit, index) => {
-        return currentBit ? `2^(-${index + 1})` : "0";
-      }).join(" + ");
-    }
-
-    valueString() {
-      var expValue = this.exponentValue();
-      if (!isFinite(expValue) || isNaN(expValue)) {
-        return (this.sign() * expValue).toString();
-      }
-      var sign = this.sign().toString();
-      var exp = `2^${expValue}`;
-      var ones = this.isDenormal() ? "0" : "1";
-      var sig = this.significandValueString();
-      return `${sign} * ${exp} * ( ${ones} + ${sig} )`;
-    }
-
   };
   CustomFloat.numExponentBits = numExponentBits;
   CustomFloat.numSignificandBits = numSignificandBits;

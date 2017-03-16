@@ -62,10 +62,6 @@ describe("Minifloat with pattern 01111000", function () {
   it("has value Infinity", function () {
     assert.strictEqual(mf.exponentValue(), Infinity);
   });
-
-  it("has a valueString of 'Infinity'", function () {
-    assert.strictEqual(mf.valueString(), "Infinity");
-  });
 });
 
 describe("Minifloat with pattern 11111000", function () {
@@ -85,10 +81,6 @@ describe("Minifloat with pattern 11111000", function () {
 
   it("has exponent value Infinity", function () {
     assert.strictEqual(mf.exponentValue(), Infinity);
-  });
-
-  it("has a valueString of '-Infinity'", function () {
-    assert.strictEqual(mf.valueString(), "-Infinity");
   });
 });
 
@@ -110,10 +102,6 @@ describe("Minifloat with pattern 011110001", function () {
   it("has value NaN", function () {
     assert(isNaN(mf.exponentValue()));
   });
-
-  it("has a valueString of 'NaN'", function () {
-    assert.strictEqual(mf.valueString(), "NaN");
-  });
 });
 
 describe("Minifloat with pattern 00000000 (positive 0)", function () {
@@ -133,10 +121,6 @@ describe("Minifloat with pattern 00000000 (positive 0)", function () {
 
   it("has exponent value -6", function () {
     assert.strictEqual(mf.exponentValue(), -6);
-  });
-
-  it("has a valueString of '1 * 2^-6 * ( 0 + 0 + 0 + 0 )'", function () {
-    assert.strictEqual(mf.valueString(), "1 * 2^-6 * ( 0 + 0 + 0 + 0 )");
   });
 });
 
@@ -158,10 +142,6 @@ describe("Minifloat with pattern 10000000 (negative 0)", function () {
   it("has exponent value -6", function () {
     assert.strictEqual(mf.exponentValue(), -6);
   });
-
-  it("has a valueString of '-1 * 2^-6 * ( 0 + 0 + 0 + 0 )'", function () {
-    assert.strictEqual(mf.valueString(), "-1 * 2^-6 * ( 0 + 0 + 0 + 0 )");
-  });
 });
 
 describe("Minifloat with pattern 01110101", function () {
@@ -181,9 +161,5 @@ describe("Minifloat with pattern 01110101", function () {
 
   it("has exponent value 7", function () {
     assert.strictEqual(mf.exponentValue(), 7);
-  });
-
-  it("has a valueString of '1 * 2^7 * ( 1 + 2^(-1) + 0 + 2^(-3) )'", function () {
-    assert.strictEqual(mf.valueString(), "1 * 2^7 * ( 1 + 2^(-1) + 0 + 2^(-3) )");
   });
 });

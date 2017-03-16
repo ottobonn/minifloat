@@ -1,5 +1,46 @@
 import React from "react";
 
+function interleave(array, separator) {
+  let final = [];
+  let firstItem = true;
+  for (let i = 0; i < array.length; i++) {
+    if (array[i]) {
+      if (i > 0 && !firstItem) {
+        final.push(separator);
+      }
+      final.push(array[i]);
+      firstItem = false;
+    }
+  }
+  return final;
+}
+
+function renderSignificandValue(float) {
+  let values = [];
+  if (float.isNormal()) {
+    values.push(1);
+  }
+  values = values.concat(float.significandBits.map((currentBit, index) => {
+    let value = null;
+    if (currentBit) {
+      value = <span>2<sup>{-(index + 1)}</sup></span>;
+    }
+    return value;
+  }));
+  return interleave(values, " + ");
+}
+
+function renderValue(float) {
+  var expValue = float.exponentValue();
+  if (!isFinite(expValue) || isNaN(expValue)) {
+    return (float.sign() * expValue).toString();
+  }
+  var sign = float.sign().toString();
+  var exp = <span>2<sup>{expValue}</sup></span>;
+  var sig = renderSignificandValue(float);
+  return [sign, " * ", exp, " * (", sig, ")"];
+}
+
 /*
 Given a Float `float`, return a human-readable string explaining how to reason
 about its value.
@@ -48,7 +89,7 @@ export default class ValueDisplay extends React.Component {
       <div className="jumbotron">
         <h2>Float Value</h2>
         <div id="valueString">
-          {float ? float.valueString() : "No float"}
+          {float ? renderValue(float) : "No float"}
         </div>
         <hr />
         <h3>Why?</h3>
