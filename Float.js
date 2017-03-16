@@ -16,8 +16,9 @@ function floatFactory(numExponentBits=4, numSignificandBits=3) {
       this.exponentBits = new Array(numExponentBits).fill(0);
       this.significandBits = new Array(numSignificandBits).fill(0);
       if (bitPattern) {
-        assert(Array.isArray(bitPattern));
-        assert.strictEqual(bitPattern.length, 1 + numExponentBits + numSignificandBits);
+        assert(Array.isArray(bitPattern), "Float bit pattern must be an array.");
+        let numBits = 1 + numExponentBits + numSignificandBits;
+        assert.strictEqual(bitPattern.length, numBits, `Float bit pattern must contain ${numBits} bits.`);
         this.signBit = bitPattern[0];
         this.exponentBits = bitPattern.slice(1, 1 + numExponentBits);
         this.significandBits = bitPattern.slice(1 + numExponentBits);
