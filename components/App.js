@@ -16,7 +16,7 @@ export default class App extends React.Component {
   }
 
   parseBits(string) {
-    length = string.length;
+    let length = string.length;
     if (length != this.state.numBits) {
       return null;
     }
@@ -48,7 +48,12 @@ export default class App extends React.Component {
     return (
       <div>
         <form>
-          <BinaryInput numExponentBits={4} numSignificandBits={3} onChange={this.handleChange} />
+          <BinaryInput
+            numExponentBits={4}
+            numSignificandBits={3}
+            onChange={this.handleChange}
+            float={this.state.float}
+          />
         </form>
         <ValueDisplay float={this.state.float} />
       </div>

@@ -4,24 +4,30 @@
   .groups-wrapper
     display: flex
     justify-content: center
-    align-items: center
+    align-items: top
 
   .bit-group
     display: flex
     flex-direction: column
+
     &.exponent
       background-color: #ddd
+
     .name
       margin: .2em
       font-size: 100%
 
-  .bit-group-input-wrapper
-    display: flex
-    flex-direction: row
-    flex: 1
+    .input-wrapper, .value-wrapper
+      display: flex
+      flex-direction: row
+      flex: 1
 
-  .bit-input-wrapper
-    flex: 1
+    .value-wrapper
+      font-size: 200%
+
+    .bit-input-wrapper, .bit-value-wrapper
+      flex: 1
+      text-align: center
 
   .bit-input
     &::-webkit-outer-spin-button, &::-webkit-inner-spin-button
