@@ -1,62 +1,41 @@
 import React from "react";
-import {Minifloat} from "../Float";
+import {
+  HashRouter as Router,
+  Route,
+  NavLink,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
-import BinaryInput from "./BinaryInput";
-import ValueDisplay from "./ValueDisplay";
+import {floatFactory, Minifloat, Float} from "../Float";
+import FloatPage from "./FloatPage";
+
+const Links = () => {
+  return (
+    <nav className="nav nav-pills">
+      <NavLink className="nav-link" activeClassName="active" to="/floats/minifloat">Minifloat</NavLink>
+      <NavLink className="nav-link" activeClassName="active" to="/floats/float">IEEE-754 Float</NavLink>
+    </nav>
+  );
+};
 
 export default class App extends React.Component {
-
-  constructor() {
-    super();
-    this.state = {
-      float: null,
-      numBits: 8
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  parseBits(string) {
-    let length = string.length;
-    if (length != this.state.numBits) {
-      return null;
-    }
-    let bits = new Array(length);
-    for (let i = 0; i < length; i++) {
-      let bit = parseInt(string[i]);
-      if (bit != 0 && bit != 1) {
-        return null;
-      }
-      bits[i] = bit;
-    }
-    return bits;
-  }
-
-  handleChange(valueString) {
-    let bits = this.parseBits(valueString);
-    if (bits) {
-      this.setState({
-        float: new Minifloat(bits)
-      });
-    } else {
-      this.setState({
-        float: null
-      });
-    }
-  }
-
   render() {
     return (
-      <div>
-        <form>
-          <BinaryInput
-            numExponentBits={4}
-            numSignificandBits={3}
-            onChange={this.handleChange}
-            float={this.state.float}
-          />
-        </form>
-        <ValueDisplay float={this.state.float} />
-      </div>
+      <Router>
+        <div>
+          <header id="site-header">
+            <h1 id="page-title">Float Explorer</h1>
+            <Links />
+          </header>
+          <Switch>
+            <Route exact path="/floats/minifloat" component={() => <FloatPage floatClass={Minifloat} />} />
+            <Route exact path="/floats/float" component={() => <FloatPage floatClass={Float} />} />
+            <Route path="/" render={() => <Redirect to="/floats/minifloat" />} />
+            <Route render={() => <h1>Not found</h1>} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 };
