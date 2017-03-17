@@ -7,7 +7,7 @@ function unsignedValue(bitArray) {
   }, 0);
 };
 
-function floatFactory(numExponentBits=4, numSignificandBits=3) {
+function floatFactory(numExponentBits=4, numSignificandBits=3, name="Custom Float") {
   let bias = (1 << (numExponentBits - 1)) - 1;
 
   class CustomFloat {
@@ -75,10 +75,12 @@ function floatFactory(numExponentBits=4, numSignificandBits=3) {
   CustomFloat.numExponentBits = numExponentBits;
   CustomFloat.numSignificandBits = numSignificandBits;
   CustomFloat.bias = bias;
+  CustomFloat.numBits = 1 + numExponentBits + numSignificandBits;
+  CustomFloat.typeName = name;
   return CustomFloat;
 };
 
-let Minifloat = floatFactory(4, 3);
-let Float = floatFactory(8, 23);
+let Minifloat = floatFactory(4, 3, "Minifloat");
+let Float = floatFactory(8, 23, "IEEE-754 Float");
 
 export {unsignedValue, floatFactory, Minifloat, Float};

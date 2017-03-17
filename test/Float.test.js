@@ -42,6 +42,10 @@ describe("Minifloat", function () {
   it("has a bias of 7", function () {
     assert.strictEqual(Minifloat.bias, 7);
   });
+
+  it("has 8 total bits", function () {
+    assert.strictEqual(Minifloat.numBits, 8);
+  });
 });
 
 describe("Minifloat with pattern 01111000", function () {
