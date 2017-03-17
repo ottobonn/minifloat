@@ -32,12 +32,15 @@ function renderSignificandValue(float) {
 
 function renderValue(float) {
   var expValue = float.exponentValue();
-  if (!isFinite(expValue) || isNaN(expValue)) {
+  if (float.isSpecial()) {
     return (float.sign() * expValue).toString();
   }
-  var sign = float.sign().toString();
-  var exp = <span>2<sup>{expValue}</sup></span>;
-  var sig = renderSignificandValue(float);
+  if (float.value() === 0) {
+    return 0;
+  }
+  let sign = float.sign().toString();
+  let exp = <span>2<sup>{expValue}</sup></span>;
+  let sig = renderSignificandValue(float);
   return [sign, " * ", exp, " * (", sig, ")"];
 }
 

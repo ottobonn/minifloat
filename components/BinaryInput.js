@@ -27,8 +27,24 @@ export default class BinaryInput extends React.Component {
   }
 
   renderExponentValue() {
-    if (this.props.float) {
-      let numExponentBits = this.props.float.exponentBits.length;
+    if (!this.props.float) {
+      return null;
+    }
+    let numExponentBits = this.props.float.exponentBits.length;
+    if (this.props.float.isSpecial()) {
+      return (
+        <span className="bit-value-wrapper">
+          Special
+        </span>
+      );
+    }
+    else if (this.props.float.isDenormal()) {
+      return (
+        <span className="bit-value-wrapper">
+          0 (Denormal)
+        </span>
+      );
+    } else {
       return this.props.float.exponentBits.map((bit, index) => {
         let value = 0;
         if (bit) {
@@ -40,29 +56,33 @@ export default class BinaryInput extends React.Component {
           </span>
         );
       });
-    } else {
-      return null;
     }
   }
 
   renderSignificandValue() {
-    if (this.props.float) {
-      let exponent = this.props.float.exponentValue();
-      let values = this.props.float.significandBits.map((bit, index) => {
-        let value = 0;
-        if (bit) {
-          value = (<span>2<sup>{exponent - index - 1}</sup></span>);
-        }
-        return (
-          <span key={index} className="bit-value-wrapper">
-            {value}
-          </span>
-        );
-      });
-      return values;
-    } else {
+    if (!this.props.float) {
       return null;
     }
+    let exponent = this.props.float.exponentValue();
+    if (this.props.float.isSpecial()) {
+      return (
+        <span className="bit-value-wrapper">
+          {exponent}
+        </span>
+      );
+    }
+    let values = this.props.float.significandBits.map((bit, index) => {
+      let value = 0;
+      if (bit) {
+        value = (<span>2<sup>{exponent - index - 1}</sup></span>);
+      }
+      return (
+        <span key={index} className="bit-value-wrapper">
+          {value}
+        </span>
+      );
+    });
+    return values;
   }
 
   renderBitGroup(groupInfo, offset, totalNumBits) {
