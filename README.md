@@ -1,3 +1,3 @@
 # Minifloat
 
-An interactive learning tool for IEEE floating point numbers.
+An interactive learning tool for IEEE floating point numbers. [floatingpoint.technology](floatingpoint.technology)
